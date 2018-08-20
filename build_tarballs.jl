@@ -2,6 +2,9 @@
 # `julia build_tarballs.jl --help` to see a usage message.
 using BinaryBuilder
 
+name = "x265Builder"
+version = v"2.8"
+
 # Collection of sources required to build x265Builder
 sources = [
     "https://bitbucket.org/multicoreware/x265/downloads/x265_2.8.tar.gz" =>
@@ -43,5 +46,5 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "x265Builder", sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
 
