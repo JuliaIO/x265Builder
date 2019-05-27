@@ -8,7 +8,7 @@ version = v"3.0"
 # Collection of sources required to build x265Builder
 sources = [
     "http://ftp.videolan.org/pub/videolan/x265/x265_3.0.tar.gz" =>
-    "6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863",
+    "c5b9fc260cabbc4a81561a448f4ce9cad7218272b4011feabc3a6b751b2f0662",
 
 ]
 
