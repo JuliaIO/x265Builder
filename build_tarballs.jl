@@ -17,10 +17,12 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd x265_3.0/
 apk add nasm
+nasm --version
 mkdir bld && cd bld
-cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ../source
+cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain  ../source
 make -j${nproc}
 make install
+rm -vf $prefix/lib/libx265.a
 
 """
 
@@ -34,19 +36,19 @@ platforms = [
     # linux
     Linux(:i686, :glibc),
     Linux(:x86_64, :glibc),
-    Linux(:aarch64, :glibc),
+    #Linux(:aarch64, :glibc),
     Linux(:armv7l, :glibc),
     Linux(:powerpc64le, :glibc),
 
     # musl
     Linux(:i686, :musl),
     Linux(:x86_64, :musl),
-    Linux(:aarch64, :musl),
+    #Linux(:aarch64, :musl),
     Linux(:armv7l, :musl),
 
     # The BSD's
-    FreeBSD(:x86_64),
-    MacOS(:x86_64),
+    #FreeBSD(:x86_64),
+    #MacOS(:x86_64),
 ]
 
 # The products that we will ensure are always built
