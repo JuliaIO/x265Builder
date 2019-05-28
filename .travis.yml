@@ -32,4 +32,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: ianshmean/x265Builder
-    branch: release
+    branch: master
