@@ -37,14 +37,14 @@ platforms = [
     Linux(:i686, :glibc),
     Linux(:x86_64, :glibc),
     #Linux(:aarch64, :glibc),
-    Linux(:armv7l, :glibc),
+    #Linux(:armv7l, :glibc),
     Linux(:powerpc64le, :glibc),
 
     # musl
     Linux(:i686, :musl),
     Linux(:x86_64, :musl),
     #Linux(:aarch64, :musl),
-    Linux(:armv7l, :musl),
+    #Linux(:armv7l, :musl),
 
     # The BSD's
     FreeBSD(:x86_64),
