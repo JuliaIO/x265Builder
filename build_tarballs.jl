@@ -47,8 +47,8 @@ platforms = [
     Linux(:armv7l, :musl),
 
     # The BSD's
-    #FreeBSD(:x86_64),
-    #MacOS(:x86_64),
+    FreeBSD(:x86_64),
+    MacOS(:x86_64),
 ]
 
 # The products that we will ensure are always built
