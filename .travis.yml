@@ -1,8 +1,8 @@
 language: julia
 os:
-  - linux
+- linux
 julia:
-  - 0.6
+- 1.0
 notifications:
   email: false
 git:
@@ -10,18 +10,26 @@ git:
 cache:
   timeout: 1000
   directories:
-    - downloads
+  - downloads
+  - shards
 env:
   global:
-    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-    - BINARYBUILDER_AUTOMATIC_APPLE=false
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_SHARDS_DIR=shards
+  - BINARYBUILDER_AUTOMATIC_APPLE=true
+  - BINARYBUILDER_USE_CCACHE=true
 sudo: required
-
-# Before anything else, get the latest versions of things
 before_script:
-  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryProvider.jl")'
-  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
-
+- julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
 script:
-  - julia build_tarballs.jl
-
+- julia build_tarballs.jl
+deploy:
+  provider: releases
+  api-key:
+    secure: rHU6H/5Yq2iFXtGsucgkFJvIyMwnvGvQEdEGqNCYRP8SSct8AOXl4dSQkCpvb1VLkYKV0X0lM7HHHXu/PSTKfbx36KpqUeeSvjdFceFiiBWIT0iQW8s6AQXjPDtAiIraFIso1mSkyzlFppSWAolHZI2FVQia1mPHLqRfsw5Tsd5IRwZY/kwOkPPaEAGqpUmshRV83RKZcr9G3nOcGRppx9KH/v1+yYJgWn3zKfqElydiPQ0G27l+WCR3p27KI8sc2pBNo206kgVo9A08cA74HEcChrpTePpQr45VHHDK/2wBNVv7DFZMIivafwsZwjFvh/N/3aXaZSsmPAX64wFsPTU/2EwfiNToq+kIS9QdsvSatcI9tFveNpN21ltxSpi0FOqP4W8PU3IwkD/bP4cdIGnAmdLb0wt+bmeP8YBuDKDcrxgqJA8yj7v7fHZgDkYJbZoRTROlXMnyqowJ7Fuu6FKQoRTqxQmbA9t9pWHSU3lDB3lI98Zmdu+GoNbXve/cNbOcya2YADI2OcDenMSVeazNQ7+HOvfEwDxFqAfcU8MvRMezwWmgpZnz2yw04EgzYVZlney3T1sZhL6H2waKOHEup0CJJCs6HksXNBTTwx1IsFJR5TZZ9sKRr9tIxQo1bqxodLMI031ShftHeJHOzCaA1isbW4HoB/s6TGWTLX4=
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: ianshmean/x265Builder
+    branch: master
