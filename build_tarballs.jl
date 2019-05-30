@@ -18,9 +18,8 @@ cd $WORKSPACE/srcdir
 cd x265_3.0/
 apk add nasm
 export PKG_CONFIG_PATH="${prefix}/lib/pkgconfig"
-export ENABLE_PIC=1
 mkdir bld && cd bld
-cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DENABLE_PIC=ON  ../source
+cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DENABLE_PIC=ON -DENABLE_SHARED=off ../source
 make -j${nproc}
 make install
 rm -vf $prefix/lib/libx265.a
@@ -33,7 +32,6 @@ platforms = supported_platforms()
 
 # The products that we will ensure are always built
 products(prefix) = [
-    LibraryProduct(prefix, "libx265", :libx265),
     ExecutableProduct(prefix, "x265", :x265)
 ]
 
