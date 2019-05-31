@@ -22,7 +22,6 @@ mkdir bld && cd bld
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DENABLE_PIC=ON -DENABLE_SHARED=off ../source
 make -j${nproc}
 make install
-rm -vf $prefix/lib/libx265.a
 
 """
 
@@ -32,7 +31,8 @@ platforms = supported_platforms()
 
 # The products that we will ensure are always built
 products(prefix) = [
-    ExecutableProduct(prefix, "x265", :x265)
+    ExecutableProduct(prefix, "x265", :x265),
+    LibraryProduct(prefix, "libx265", :libx265)
 ]
 
 # Dependencies that must be installed before this package can be built
